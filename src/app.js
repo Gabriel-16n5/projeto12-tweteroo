@@ -33,7 +33,22 @@ app.get("/tweets", (request, response) => {
 	// 	tweet: "Eu amo hambúrguer de siri!"
 	//     }
     // ]
-    response.send(users)
+    response.send(tweets)
+})
+
+app.post("/tweets", (request, response) => {
+    const {username, tweet} = request.body;
+
+    const validation = users.some(users => {
+        if(users.username === username){
+            return true;
+        }
+    })
+    if(validation){
+        tweets.push(request.body);
+        return response.send("ok")
+    }
+    response.status(401).send("deu ruim");
 })
 
 app.post("/sign-up", (request, response) => {
