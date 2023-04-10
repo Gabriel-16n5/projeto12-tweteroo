@@ -18,6 +18,12 @@ const users = []
 const tweets = []
 
 app.get("/tweets", (request, response) => {
+
+    if(tweets.length > 10){
+        const maxTweets = tweets.slice(tweets.length -10);
+        return response.send(maxTweets)
+    }
+
     response.send(tweets)
 })
 
